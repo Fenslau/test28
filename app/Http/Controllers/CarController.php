@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Result;
 use App\Http\Requests\CarRequest;
-use App\Http\Resources\CarModelResource;
 use App\Http\Resources\CarResource;
 use App\Repositories\RepositoryInterface;
 use Illuminate\Http\Request;
