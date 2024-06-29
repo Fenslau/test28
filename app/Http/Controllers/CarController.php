@@ -17,9 +17,9 @@ class CarController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(CarRequest $request)
     {
-        $cars = $this->repo->index();
+        $cars = $this->repo->index($request->validated());
         return CarResource::collection($cars);
     }
 

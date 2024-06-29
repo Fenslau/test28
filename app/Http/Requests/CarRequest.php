@@ -29,11 +29,21 @@ class CarRequest extends FormRequest
                 }
 
             case 'POST': {
-                    return [];
+                    return [
+                        'car_model_id' => 'required|exists:App\Models\CarModel,id',
+                        'year' => 'nullable|numeric|between:1970,' . date('Y'),
+                        'kmage' => 'nullable|numeric|min:0',
+                        'color' => 'nullable|string'
+                    ];
                 }
 
             case 'PUT': {
-                    return [];
+                    return [
+                        'car_model_id' => 'required|exists:App\Models\CarModel,id',
+                        'year' => 'nullable|numeric|between:1970,' . date('Y'),
+                        'kmage' => 'nullable|numeric|min:0',
+                        'color' => 'nullable|string'
+                    ];
                 }
             default:
                 break;

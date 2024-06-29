@@ -13,9 +13,9 @@ class CarModelController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $carModels = $this->repo->index();
+        $carModels = $this->repo->index($request->all());
         return CarModelResource::collection($carModels);
     }
 }

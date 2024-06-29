@@ -13,9 +13,9 @@ class CarBrandController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $carBrands = $this->repo->index();
+        $carBrands = $this->repo->index($request->all());
         return CarBrandResource::collection($carBrands);
     }
 }

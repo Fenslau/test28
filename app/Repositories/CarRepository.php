@@ -28,10 +28,11 @@ class CarRepository implements RepositoryInterface
         return $car;
     }
 
-    public function update($model, array $modelData): Car|bool
+    public function update($id, array $modelData): Car|bool
     {
-        $model->update($modelData);
-        return $model;
+        $car = Car::findOrFail($id);
+        $car->update($modelData);
+        return $car;
     }
 
     public function destroy($id): void
