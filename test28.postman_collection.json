@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "acd7ce94-90da-4f77-83f5-28c33be3bf64",
+		"name": "test28",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34693074"
+	},
+	"item": [
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{path}}/cars?limit=150",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{path}}",
+								"cars"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "150"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{path}}/cars/68",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{path}}",
+								"cars",
+								"68"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{path}}/cars?car_model_id=20&year=2000&kmage=12&color=Желтый",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{path}}",
+								"cars"
+							],
+							"query": [
+								{
+									"key": "car_model_id",
+									"value": "20"
+								},
+								{
+									"key": "year",
+									"value": "2000"
+								},
+								{
+									"key": "kmage",
+									"value": "12"
+								},
+								{
+									"key": "color",
+									"value": "Желтый"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{path}}/cars/68?car_model_id=3&year=2021&kmage=2001&color=White",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{path}}",
+								"cars",
+								"68"
+							],
+							"query": [
+								{
+									"key": "car_model_id",
+									"value": "3"
+								},
+								{
+									"key": "year",
+									"value": "2021"
+								},
+								{
+									"key": "kmage",
+									"value": "2001"
+								},
+								{
+									"key": "color",
+									"value": "White"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{path}}/cars/68",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{path}}",
+								"cars",
+								"68"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Who am I",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{path}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{path}}",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"if (jsonData.auth_token && jsonData.auth_token.trim() !== \"\") {\r",
+									"    pm.collectionVariables.set(\"token\", jsonData.auth_token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{path}}/login?email=albina34@example.com&password=password",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{path}}",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "albina34@example.com"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List of Brands",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{path}}/brands?with_models=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{path}}",
+						"brands"
+					],
+					"query": [
+						{
+							"key": "with_models",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of Models",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/{{path}}/models?with_brand=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{path}}",
+						"models"
+					],
+					"query": [
+						{
+							"key": "with_brand",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.request.headers.add({\r",
+					"    key: 'Accept',\r",
+					"    value: 'application/json'\r",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "path",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
