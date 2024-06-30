@@ -3,16 +3,23 @@
 namespace App\Repositories;
 
 use App\Models\Car;
+use Illuminate\Support\Facades\Cache;
 
 class CarRepository implements RepositoryInterface
 {
 
     public function index(?array $params = array())
     {
-        $cars = Car::query()
-            ->orderBy('updated_at', 'desc')
-            ->paginate($params['limit'] ?? env('PAGINATE_PER_PAGE'))
-            ->withQueryString();
+        $page = $params['page'] ?? 1;
+        $limit = $params['limit'] ?? env('PAGINATE_PER_PAGE');
+        $path = 'cars/' .  $page . '/' . $limit;
+        $cars = Cache::tags(['cars'])->rememberForever($path, function () use ($limit) {
+            $cars = Car::query()
+                ->orderBy('updated_at', 'desc')
+                ->paginate($limit)
+                ->withQueryString();
+            return $cars;
+        });
         return $cars;
     }
 
