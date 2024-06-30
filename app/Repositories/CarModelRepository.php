@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Enums\InsurerType;
 use App\Models\CarModel;
 
 class CarModelRepository implements ReadonlyRepositoryInterface

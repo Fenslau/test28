@@ -11,20 +11,20 @@ class AuthController extends Controller
 {
     public function __construct(
         private Result $result
-    ) {}
+    ) {
+    }
 
-    public function login(UserRequest $request)	
+    public function login(UserRequest $request)
     {
-        if (auth()->attempt($request->validated())) {
-            $user = auth()->user();
+        if (auth('web')->attempt($request->validated())) {
+            $user = auth('web')->user();
             return new UserResource($user);
-        }
-        else return $this->result->error(__('Invalid login or password'));
-  	}
+        } else return $this->result->error(__('Invalid login or password'));
+    }
 
-    public function logout()	
+    public function logout()
     {
-        auth()->logout();
+        auth('web')->logout();
         return $this->result->success(__('Successfully logged out'));
     }
 }

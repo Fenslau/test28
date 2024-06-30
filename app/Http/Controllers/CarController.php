@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Helpers\Result;
 use App\Http\Requests\CarRequest;
 use App\Http\Resources\CarResource;
+use App\Models\Car;
 use App\Repositories\RepositoryInterface;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -34,15 +36,15 @@ class CarController extends Controller
         return new CarResource($car);
     }
 
-    public function update(CarRequest $request, $id)
+    public function update(CarRequest $request, Car $car)
     {
-        $car = $this->repo->update($id, $request->validated());
+        $car = $this->repo->update($car, $request->validated());
         return new CarResource($car);
     }
 
-    public function destroy($id)
+    public function destroy(Car $car)
     {
-        $this->repo->destroy($id);
+        $this->repo->destroy($car);
         return $this->result->success(
             __('Deleted successfully')
         );

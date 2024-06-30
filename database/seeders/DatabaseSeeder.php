@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Car::factory()->count(10)->create();
+        $users = User::factory()->count(10)->create();
+
+        $users->each(function ($user) {
+            $cars = Car::factory()->count(rand(1, 10))->create();
+            $user->cars()->saveMany($cars);
+        });
     }
 }

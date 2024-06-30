@@ -16,27 +16,28 @@ class CarRepository implements RepositoryInterface
         return $cars;
     }
 
-    public function show(mixed $id): Car|bool
+    public function show($model): Car|bool
     {
-        $car = Car::findOrFail($id);
+        $car = Car::findOrFail($model);
         return $car;
     }
 
     public function store(array $modelData): Car|bool
     {
+        $user = auth()->user();
+        if ($user) $modelData['user_id'] = $user->id;
         $car = Car::create($modelData);
         return $car;
     }
 
-    public function update($id, array $modelData): Car|bool
+    public function update($model, array $modelData): Car|bool
     {
-        $car = Car::findOrFail($id);
-        $car->update($modelData);
-        return $car;
+        $model->update($modelData);
+        return $model;
     }
 
-    public function destroy($id): void
+    public function destroy($model): void
     {
-        Car::findOrFail($id)->delete();
+        $model->delete();
     }
 }
