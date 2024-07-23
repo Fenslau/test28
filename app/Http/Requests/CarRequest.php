@@ -24,7 +24,8 @@ class CarRequest extends FormRequest
         switch ($this->method()) {
             case 'GET': {
                     return [
-                        'limit' => 'nullable|numeric|min:1'
+                        'limit' => 'nullable|numeric|min:1',
+                        'page' => 'nullable|numeric|min:1'
                     ];
                 }
 
